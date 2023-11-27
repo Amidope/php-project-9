@@ -1,7 +1,8 @@
 {
     "name": "hexlet/code",
     "require": {
-        "slim/slim-skeleton": "@stable"
+        "slim/slim-skeleton": "@stable",
+        "slim/php-view": "^3.2"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "@stable"
