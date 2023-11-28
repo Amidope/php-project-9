@@ -6,8 +6,7 @@
         }
     },
     "require": {
-        "slim/slim-skeleton": "^4.5",
-        "slim/php-view": "^3.2"
+        "slim/slim-skeleton": "^4.5"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7"
