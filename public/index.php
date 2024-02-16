@@ -25,7 +25,11 @@ $container->set('view', function () {
     return Twig::create(
         '../templates',
         //TODO delete cache
-        ['debug' => true, 'cache' => '/home/u/projects/php-project-9/var/cache/twig', 'auto_reload' => true]
+        [
+            'debug' => true,
+            'cache' => '/home/u/projects/php-project-9/var/cache/twig',
+            'auto_reload' => true
+        ]
     );
 });
 
@@ -59,6 +63,7 @@ $app->post('/urls', function (Request $request, Response $response) use ($router
     }
     $parsed = parse_url($url['name']);
     $normalizedUrl = $parsed['scheme'] . '://' . $parsed['host'];
+
     $urlDb = new \App\Urldb();
     $id = $urlDb->getUrlIdByName($normalizedUrl);
     if (is_int($id)) {
@@ -68,7 +73,6 @@ $app->post('/urls', function (Request $request, Response $response) use ($router
         $id = $urlDb->getUrlIdByName($normalizedUrl);
         $this->get('flash')->addMessage('success', 'Страница успешно добавлена ');
     }
-
     $url = $router->urlFor('urls.show', ['id' => $id]);
     return $response->withRedirect($url, 302);
 
@@ -79,6 +83,7 @@ $app->get('/urls/{id}', function (Request $request, Response $response, $id) {
     $urlDb = new \App\Urldb();
     $url = $urlDb->getUrl($id);
     $checks = $urlDb->getAllUrlChecks($id);
+
     return $this->get('view')->render($response, 'urls/show.twig', [
         'flash' => $flash,
         'url' => $url,
@@ -95,7 +100,6 @@ $app->post('/urls/{id}/checks', function (Request $request, Response $response, 
         $exception = $e;
         // FIXME
 //        dd($e->getMessage());
-
         $this->get('flash')->addMessage('error', ' Произошла ошибка при проверке, не удалось подключиться');
     }
     if (empty($exception)) {
@@ -104,7 +108,6 @@ $app->post('/urls/{id}/checks', function (Request $request, Response $response, 
     $url = $router->urlFor('urls.show', ['id' => $id]);
     return $response->withRedirect($url, 302);
 })->setName('checks.create');
-
 
 $app->run();
 

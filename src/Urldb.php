@@ -67,31 +67,15 @@ class Urldb
                 ]
             );
     }
-    public function getAllUrls()
-    {
-        return $this->pdo
-            ->query('SELECT * FROM urls ORDER BY id DESC')
-            ->fetchAll(\PDO::FETCH_ASSOC);
-    }
 
-    public function getLastUrlCheck(int $id)
-    {
-        $stmt = $this->pdo->prepare(
-            'SELECT * FROM url_checks
-                WHERE url_id = ?
-                ORDER BY created_at DESC
-                LIMIT 1'
-        );
-        $stmt->execute([$id]);
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    }
     public function getAllUrlChecks(int $id)
     {
         $stmt = $this->pdo->prepare(
             'SELECT * FROM url_checks
                 WHERE url_id = ?
                 ORDER BY created_at DESC
-        ');
+        '
+        );
         $stmt->execute([$id]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
