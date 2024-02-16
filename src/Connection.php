@@ -1,12 +1,14 @@
-<?php
+<?php /** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace App;
+
+use PDO;
 
 class Connection
 {
     private static ?Connection $conn = null;
 
-    public function connect()
+    public function connect(): PDO
     {
 //      "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s"
 
@@ -20,11 +22,12 @@ class Connection
             $databaseUrl['user'],
             $databaseUrl['pass']
         );
-        $pdo = new \PDO($dsn);
-        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        //dd($dsn);
+        $pdo = new PDO($dsn);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     }
-    public static function get()
+    public static function get(): ?Connection
     {
         if (static::$conn === null) {
             static::$conn = new self();

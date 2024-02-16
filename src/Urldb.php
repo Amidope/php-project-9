@@ -21,7 +21,9 @@ class Urldb
 
     public function saveUrl(string $name): void
     {
-        $this->pdo->prepare('INSERT INTO urls (name) VALUES (?)')->execute([$name]);
+        $this->pdo
+            ->prepare('INSERT INTO urls (name) VALUES (?)')
+            ->execute([$name]);
     }
 
     public function getUrl($id)
@@ -37,40 +39,19 @@ class Urldb
         $url = $urlDb->getUrl($id);
         $name = $url['name'];
 
-        //! exception if cant connect
-
         $client = new \GuzzleHttp\Client();
         $res = $client->request('GET', $name);
         $html = $res->getBody()->getContents();
         $statusCode = $res->getStatusCode();
 
         $document = new \DiDom\Document($html);
-        $d = map(['title', 'h1'], fn($tag) => $document->find($tag)?->first()?->text());
-//        $d = map(['title', 'h1'], fn($tag) => $document->find($tag)?->first()?->text());
-//        .. empty($elements = $document->find($tag)) ? '' : $elements[0]->text());
-        $str = 'title';
-        $titles = $document->find($str);
-        $h1Headers = $document->find('h1');
-        $descriptions = optional($document->xpath('//meta[@name="description"]'))
-            ->first()
-            ->getAttribute('content');
+        $tagContents = map(
+            ['h1' => 'h1', 'title' => 'title'],
+            fn($tag) => $document->first($tag)?->text()
+        );
 
-//            empty($elements = $document->xpath('//meta[@name="description"]'))
-//            ? ''
-//            : $elements[0]->getAttribute('content');
-
-//        $tagContents = map(
-//            [$h1Headers, $titles, $descriptions],
-//            fn($elements) => empty($elements) ? '' : $elements[0]->text()
-//        );
-//        dd($description);
-//        $dom->loadHTML($html, LIBXML_NOERROR);
-//        $document = new \DOMXPath($dom);
-//        $title = $document->find('//title');
-
-//
-//        $metaNode = $xpath->query('//meta[@name="description"]')->item(0);
-//        $description = is_null($metaNode) ? '' : $metaNode->getAttribute('content');
+        $description = $document->first('meta[name="description"]')
+            ?->getAttribute('content');
 
         $this->pdo
             ->prepare(
@@ -81,13 +62,11 @@ class Urldb
                 [
                     'url_id' => $id,
                     'status_code' => $statusCode,
-                    'h1' => $tagContents[0],
-                    'title' => $tagContents[1],
-                    'description' => $tagContents[2]
+                    'description' => $description,
+                    ...$tagContents
                 ]
             );
     }
-//Where highest_cust_id = 1
     public function getAllUrls()
     {
         return $this->pdo
@@ -98,11 +77,11 @@ class Urldb
     public function getLastUrlCheck(int $id)
     {
         $stmt = $this->pdo->prepare(
-            'SELECT * FROM url_checks_fake
+            'SELECT * FROM url_checks
                 WHERE url_id = ?
                 ORDER BY created_at DESC
-                LIMIT 1
-        ');
+                LIMIT 1'
+        );
         $stmt->execute([$id]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -129,19 +108,12 @@ class Urldb
                 FROM urls
                 LEFT JOIN (
                     SELECT 
-                        url_id, 
-                        id, 
-                        status_code, 
-                        h1, 
-                        title, 
-                        description, 
-                        created_at,
+                        *,
                         ROW_NUMBER() OVER (PARTITION BY url_id ORDER BY created_at DESC) as row_num
                     FROM 
                         url_checks
                 ) AS url_checks
-                ON 
-                    urls.id = url_checks.url_id AND url_checks.row_num = 1'
+                ON urls.id = url_checks.url_id AND url_checks.row_num = 1'
             )
             ->fetchAll(\PDO::FETCH_ASSOC);
     }
