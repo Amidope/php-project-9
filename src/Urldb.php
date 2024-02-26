@@ -82,7 +82,7 @@ class Urldb
 
     public function getAllUrlsWithChek()
     {
-        $sql = "";
+        $sql = '';
         return $this->pdo
             ->query(
                 'SELECT urls.id AS id,

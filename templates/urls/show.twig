@@ -1,15 +1,11 @@
 {% extends "sections/base.twig" %}
 
 {% block main %}
-    {% if flash is not empty %}
-        {% for key, value in flash %}
-            {% set alertClass = (key == 'success') ? 'alert-success' : 'alert-danger' %}
-            {% set message = value.0 %}
-            <div class="alert {{ alertClass }}" role="alert">
-                {{ message }}
-            </div>
+    {% for type, messages in flash %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}" role="alert">{{ message }}</div>
         {% endfor %}
-    {% endif %}
+    {% endfor %}
         <div class="container-lg mt-3">
             <h1>Сайт: {{ url.name }}</h1>
             <div class="table-responsive">

@@ -100,7 +100,7 @@ $app->post('/urls/{id}/checks', function (Request $request, Response $response, 
         $exception = $e;
         // FIXME
 //        dd($e->getMessage());
-        $this->get('flash')->addMessage('error', ' Произошла ошибка при проверке, не удалось подключиться');
+        $this->get('flash')->addMessage('danger', ' Произошла ошибка при проверке, не удалось подключиться');
     }
     if (empty($exception)) {
         $this->get('flash')->addMessage('success', 'Страница успешно проверена');
