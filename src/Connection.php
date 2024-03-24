@@ -1,8 +1,7 @@
 <?php
 
-/** @noinspection PhpComposerExtensionStubsInspection */
 
-namespace App;
+namespace Amidope\PageAnalyzer;
 
 use PDO;
 

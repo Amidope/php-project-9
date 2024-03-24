@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace Amidope\PageAnalyzer;
 
 use function Functional\map;
 
-class Urldb
+class Db
 {
     private \PDO $pdo;
     public function __construct()
@@ -35,8 +35,7 @@ class Urldb
 
     public function saveUrlCheck($id): void
     {
-        $urlDb = new \App\Urldb();
-        $url = $urlDb->getUrl($id);
+        $url = $this->getUrl($id);
         $name = $url['name'];
 
         $client = new \GuzzleHttp\Client();
