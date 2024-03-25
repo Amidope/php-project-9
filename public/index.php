@@ -11,4 +11,3 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 $app = buildApp();
 
 $app->run();
-
