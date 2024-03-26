@@ -1,6 +1,7 @@
 <?php
 
 use Amidope\PageAnalyzer\Db;
+use Amidope\PageAnalyzer\Validator;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -23,6 +24,7 @@ $app->post('/urls', function (Request $request, Response $response) {
     try {
         $this->get('validator')->validateUrl($url['name']);
     } catch (\Exception $e) {
+        // TODO 422
         return $this->get('view')->render($response, 'index.twig', [
             'invalidDataFormMessage' => $e->getMessage()
         ]);
