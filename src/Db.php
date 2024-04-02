@@ -2,6 +2,7 @@
 
 namespace Amidope\PageAnalyzer;
 
+use Carbon\Carbon;
 use function Functional\map;
 
 class Db
@@ -22,8 +23,11 @@ class Db
     public function saveUrl(string $name): void
     {
         $this->pdo
-            ->prepare('INSERT INTO urls (name) VALUES (?)')
-            ->execute([$name]);
+            ->prepare('INSERT INTO urls (name, created_at) VALUES (:name, :created_at)')
+            ->execute([
+                'name' => $name,
+                'created_at' => Carbon::now()
+            ]);
     }
 
     public function getUrl($id)
@@ -54,14 +58,15 @@ class Db
 
         $this->pdo
             ->prepare(
-                'INSERT INTO url_checks (url_id, status_code, h1, title, description)
-                VALUES (:url_id, :status_code, :h1, :title, :description)'
+                'INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at)
+                VALUES (:url_id, :status_code, :h1, :title, :description, :created_at)'
             )
             ->execute(
                 [
                     'url_id' => $id,
                     'status_code' => $statusCode,
                     'description' => $description,
+                    'created_at' => Carbon::now(),
                     ...$tagContents
                 ]
             );
