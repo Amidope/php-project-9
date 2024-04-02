@@ -10,12 +10,16 @@
                 <p class="lead">Бесплатно проверяйте сайты на SEO пригодность</p>
                 <form class="row mb-3" action="/urls" method="post">
                     <div class="col">
-                        <input type="text" required="required" name="url[name]" class="form-control form-control-lg mb-3" placeholder="https://www.example.com">
-                            {% if invalidDataFormMessage is defined %}
-                                <div class="invalid-feedback">
-                                    {{ invalidDataFormMessage }}
-                                </div>
-                            {% endif %}
+                        <input
+                                type="text"
+                                id="validationServerUrl"
+                                name="url[name]"
+                                class="form-control {{ formValidationClass }} form-control-lg mb-3"
+                                placeholder="https://www.example.com"
+                                required>
+                        <div id="validationServerUrl" class="invalid-feedback">
+                            Некорректный URL
+                        </div>
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary  btn-lg  text-uppercase ">Проверить</button>
