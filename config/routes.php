@@ -26,7 +26,7 @@ $app->post('/urls', function (Request $request, Response $response) {
         // TODO 422
         return $this->get('view')->render($response, 'index.twig', [
             'formValidationClass' => 'is-invalid'
-        ]);
+        ])->withStatus(422);
     }
     $parsed = parse_url($url['name']);
     $normalizedUrl = $parsed['scheme'] . '://' . $parsed['host'];
