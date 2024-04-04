@@ -42,7 +42,7 @@ $app->post('/urls', function (Request $request, Response $response) {
         $this->get('flash')->addMessage('success', 'Страница успешно добавлена ');
     }
     $url = $this->get('router')->urlFor('urls.show', ['id' => $id]);
-    return $response->withRedirect($url, 302);
+    return $response->withRedirect($url);
 
 })->setName('urls.create');
 
@@ -73,7 +73,7 @@ $app->post('/urls/{id}/checks', function (Request $request, Response $response, 
         $this->get('flash')->addMessage('success', 'Страница успешно проверена');
     }
     $url = $this->get('router')->urlFor('urls.show', ['id' => $id]);
-    return $response->withRedirect($url, 302);
+    return $response->withRedirect($url);
 })->setName('checks.create');
 
 
