@@ -66,7 +66,7 @@ $app->post('/urls/{id}/checks', function (Request $request, Response $response, 
     $db = $this->get('db');
     try {
         $db->saveUrlCheck($id);
-    } catch (\Exception $e) {
+    } catch (\Exception $exception) {
         $this->get('flash')->addMessage('danger', ' Произошла ошибка при проверке, не удалось подключиться');
     }
     if (empty($exception)) {
