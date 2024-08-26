@@ -1,5 +1,6 @@
 <?php
 
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Container\ContainerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
@@ -13,6 +14,25 @@ return [
         AppFactory::setContainer($c);
         $app = AppFactory::create();
         $app->add(TwigMiddleware::createFromContainer($app));
+        $errorMiddleware = $app->addErrorMiddleware(true, true, true);
+        $errorMiddleware->setDefaultErrorHandler(function (
+            Request $request,
+            Throwable $exception,
+            bool $displayErrorDetails,
+            bool $logErrors,
+            bool $logErrorDetails
+        ) use ($app) {
+            // Логирование ошибки
+            error_log($exception->getMessage());
+
+            // Использование Twig для рендеринга страницы ошибки
+            $response = $app->getResponseFactory()->createResponse();
+            $view = $app->getContainer()->get('view');
+            return $view->render($response, 'error.twig', [
+                'message' => 'Что-то пошло не так ¯\_(ツ)_/¯ Пожалуйста, попробуйте позже.',
+            ])->withStatus(500);
+        });
+
         return $app;
     },
     'db' => function () {
@@ -24,7 +44,7 @@ return [
             //TODO delete cache
             [
                 'debug' => true,
-                'cache' => '/home/u/projects/php-project-9/var/cache/twig',
+                'cache' => '/app/var/cache/twig',
                 'auto_reload' => true
             ]
         );
