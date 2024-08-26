@@ -1,0 +1,26 @@
+services:
+  app:
+    container_name: analyzer-app
+    build:
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./:/app
+  db:
+    container_name: analyzer-db
+    image: postgres:16.4-alpine3.20
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: analyzer_data
+    volumes:
+      - analyzer-db:/var/lib/postgresql/data
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+    restart: unless-stopped
+
+volumes:
+  analyzer-app:
+  analyzer-db:
