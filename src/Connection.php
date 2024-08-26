@@ -12,7 +12,7 @@ class Connection
 {
     private static ?Connection $conn = null;
 
-    private function createDsnFromUrl(string $databaseUrl): string
+    protected function createDsnFromUrl(string $databaseUrl): string
     {
         $databaseUrl = parse_url($_ENV['DATABASE_URL']);
         $databaseUrl['port'] = $databaseUrl['port'] ?? '5432';
