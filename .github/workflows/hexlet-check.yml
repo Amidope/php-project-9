@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Clean Twig Cache
+        run: rm -rf ./var
+
       - name: Hexlet project check
         uses: hexlet/project-action@release
         with:
