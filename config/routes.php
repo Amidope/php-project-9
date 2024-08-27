@@ -1,13 +1,11 @@
 <?php
 
 use Amidope\PageAnalyzer\Db;
-use Psr\Http\Message\ResponseInterface as Response;
+//use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\App;
+use Slim\Http\Response as Response;
 
-/**
- * @var App $app
- */
+/** @var \Slim\App<\Psr\Container\ContainerInterface> $app */
 $app->get('/', function (Request $request, Response $response) {
     return $this->get('view')->render($response, 'index.twig');
 })->setName('home');
