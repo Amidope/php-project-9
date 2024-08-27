@@ -27,9 +27,8 @@ jobs:
       - name: Show current dir
         run: pwd
 
-      - name: Find file by name
-        run: |
-          find . -name "2083f98d9d65ed9fa8f0f81a3bfe0310.php"
+      - name: Watch home dir
+        run: cd && tree -a -L 3
 
 
       - name: Clean Twig Cache Before Tests
