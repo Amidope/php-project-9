@@ -43,8 +43,7 @@ return [
             '../templates',
             //TODO delete cache
             [
-                'debug' => true,
-//                'cache' => '/app/var/cache/twig',
+                'debug' => false,
                 'auto_reload' => true
             ]
         );
