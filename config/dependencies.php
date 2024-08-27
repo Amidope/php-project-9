@@ -44,7 +44,7 @@ return [
             //TODO delete cache
             [
                 'debug' => true,
-                'cache' => '/app/var/cache/twig',
+//                'cache' => '/app/var/cache/twig',
                 'auto_reload' => true
             ]
         );
