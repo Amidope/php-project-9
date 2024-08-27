@@ -12,6 +12,7 @@ $app->get('/', function (Request $request, Response $response) {
     return $this->get('view')->render($response, 'index.twig');
 })->setName('home');
 
+
 $app->get('/urls', function (Request $request, Response $response) {
     /** @var Db $db */
     $db = $this->get('db');

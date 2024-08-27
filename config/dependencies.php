@@ -53,6 +53,7 @@ return [
         return new Validator();
     },
     'router' => function (ContainerInterface $c) {
+        /** @var \Slim\App $app */
         $app = $c->get('app');
         $routeCollector = $app->getRouteCollector();
         return $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs())->getRouteParser();
