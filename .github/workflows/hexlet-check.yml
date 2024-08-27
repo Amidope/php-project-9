@@ -28,7 +28,7 @@ jobs:
         run: pwd
 
       - name: Watch home dir
-        run: cd && ls && tree -a -L 3
+        run: cd && pwd && tree -a -L 3
 
 
       - name: Clean Twig Cache Before Tests
