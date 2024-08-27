@@ -17,22 +17,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+#
+#      - name: Clean Twig Cache Before Tests
+#        run: rm -rf ./public/
+#
       - name: Install tree
         run: sudo apt-get install -y tree
 
       - name: Show directory structure
-        run: tree -a -L 3
-
-      - name: Show current dir
-        run: pwd
-
-      - name: Watch home dir
-        run: cd && pwd && tree -a -L 3
-
-
-      - name: Clean Twig Cache Before Tests
-        run: rm -rf ./public/
+        run: tree -a -L 5
+#
+#      - name: Show current dir
+#        run: pwd
+#
+#      - name: Watch home dir
+#        run: cd && pwd && tree -a -L 3
+#
 
       - name: Hexlet project check
         uses: hexlet/project-action@release
