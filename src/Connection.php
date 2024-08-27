@@ -14,15 +14,15 @@ class Connection
 
     protected function createDsnFromUrl(string $databaseUrl): string
     {
-        $databaseUrl = parse_url($_ENV['DATABASE_URL']);
-        $databaseUrl['port'] = $databaseUrl['port'] ?? '5432';
+        $parsedUrl = parse_url($databaseUrl);
+        $parsedUrl['port'] = $parsedUrl['port'] ?? '5432';
         return sprintf(
             "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
-            $databaseUrl['host'],
-            $databaseUrl['port'],
-            ltrim($databaseUrl['path'], '/'),
-            $databaseUrl['user'],
-            $databaseUrl['pass']
+            $parsedUrl['host'],
+            $parsedUrl['port'],
+            ltrim($parsedUrl['path'], '/'),
+            $parsedUrl['user'],
+            $parsedUrl['pass']
         );
     }
     public function connect(): PDO
