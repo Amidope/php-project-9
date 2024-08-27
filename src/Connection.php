@@ -1,9 +1,9 @@
 <?php
 
-
 namespace Amidope\PageAnalyzer;
 
 use PDO;
+
 use function ltrim;
 use function parse_url;
 use function sprintf;

@@ -3,6 +3,7 @@
 namespace Amidope\PageAnalyzer;
 
 use Carbon\Carbon;
+
 use function Functional\map;
 
 class Db
