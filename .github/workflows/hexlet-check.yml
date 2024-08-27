@@ -18,8 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Clean Twig Cache
-        run: rm -rf ./var
+      - name: Clean Twig Cache Before Tests
+        run: |
+          rm -rf ./var/cache/twig
+          mkdir -p ./var/cache/twig
 
       - name: Hexlet project check
         uses: hexlet/project-action@release
