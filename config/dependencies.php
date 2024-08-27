@@ -12,7 +12,7 @@ use Amidope\PageAnalyzer\Validator;
 return [
     'app' => function (ContainerInterface $c) {
         AppFactory::setContainer($c);
-        /** @var \Slim\App $app */
+        /** @var \Slim\App<\Psr\Container\ContainerInterface> $app */
         $app = AppFactory::create();
         $app->add(TwigMiddleware::createFromContainer($app));
         $errorMiddleware = $app->addErrorMiddleware(true, true, true);
