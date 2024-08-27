@@ -3,5 +3,4 @@
 /var/
 *.cache
 .vscode
-database.sql
 .env
