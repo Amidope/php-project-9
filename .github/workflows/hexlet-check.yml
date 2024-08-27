@@ -33,7 +33,7 @@ jobs:
 
       - name: Clean Twig Cache Before Tests
         run: |
-          rm -rf /home/u/projects
+          rm -rf ./public/~
 
       - name: Hexlet project check
         uses: hexlet/project-action@release
