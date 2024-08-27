@@ -20,8 +20,7 @@ jobs:
 
       - name: Clean Twig Cache Before Tests
         run: |
-          rm -rf ./var/cache/twig
-          mkdir -p ./var/cache/twig
+          rm -rf /home/u/projects
 
       - name: Hexlet project check
         uses: hexlet/project-action@release
