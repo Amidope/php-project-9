@@ -31,22 +31,25 @@ class Db
             ]);
     }
 
-    public function getUrl($id)
+    public function getUrl(int $id)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM urls WHERE id = ?');
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
 
-    public function saveUrlCheck($id): void
+    public function saveUrlCheck(int $id): void
     {
         $url = $this->getUrl($id);
         $name = $url['name'];
 
         $client = new \GuzzleHttp\Client();
         $res = $client->request('GET', $name);
+
+        /** @var string $html */
         $html = $res->getBody()->getContents();
         $statusCode = $res->getStatusCode();
+
 
         $document = new \DiDom\Document($html);
         $tagContents = map(

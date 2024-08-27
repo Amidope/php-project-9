@@ -32,7 +32,7 @@ class Connection
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     }
-    public static function get(): ?Connection
+    public static function get(): Connection
     {
         if (static::$conn === null) {
             static::$conn = new self();
