@@ -19,6 +19,7 @@ $app->get('/urls', function (Request $request, Response $response) {
 })->setName('urls.index');
 
 $app->post('/urls', function (Request $request, Response $response) {
+
     $url = $request->getParsedBodyParam('url');
     try {
         $this->get('validator')->validateUrl($url['name']);

@@ -27,6 +27,7 @@ return [
 
             // Использование Twig для рендеринга страницы ошибки
             $response = $app->getResponseFactory()->createResponse();
+            /** @var Twig $view */
             $view = $app->getContainer()->get('view');
             return $view->render($response, 'error.twig', [
                 'message' => 'Что-то пошло не так ¯\_(ツ)_/¯ Пожалуйста, попробуйте позже.',
