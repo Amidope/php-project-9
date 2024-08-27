@@ -40,12 +40,11 @@ return [
     },
     'view' => function () {
         return Twig::create(
-            '../templates',
-            //TODO delete cache
-            [
-                'debug' => false,
-                'auto_reload' => true
-            ]
+            '../templates'
+//            [
+//                'debug' => false,
+//                'auto_reload' => true
+//            ]
         );
     },
     'validator' => function () {
