@@ -21,6 +21,7 @@ $app->get('/urls', function (Request $request, Response $response) {
 })->setName('urls.index');
 
 $app->post('/urls', function (Request $request, Response $response) {
+    /** @var array $parsedBody */
     $parsedBody = $request->getParsedBody();
     $url = $parsedBody['url'] ?? null;
 
