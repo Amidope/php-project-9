@@ -4,6 +4,7 @@ namespace Amidope\PageAnalyzer;
 
 use Carbon\Carbon;
 
+use DiDom\Query;
 use function Functional\map;
 
 class Db
@@ -55,7 +56,7 @@ class Db
             ['h1' => 'h1', 'title' => 'title'],
             function ($tag) use ($document) {
                 /** @var \DiDom\Element|null $node */
-                $node = $document->first($tag);
+                $node = $document->first($tag, $type = Query::TYPE_CSS, true);
                 return $node->text();
             }
             //            fn($tag) => $document->first($tag)?->text()
