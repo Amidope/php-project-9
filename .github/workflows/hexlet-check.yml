@@ -32,8 +32,8 @@ jobs:
 #
 #      - name: Clear /home/runner/work/
 #        run: rm -rf /home/runner/work/
-      - name: Del2
-        run: rm -rf ~/.cache
+#      - name: Del2
+#        run: rm -rf ~/.cache
 #
 #      - name: Clear cache
 #        run: |
