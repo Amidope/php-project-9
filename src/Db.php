@@ -3,8 +3,8 @@
 namespace Amidope\PageAnalyzer;
 
 use Carbon\Carbon;
-
 use DiDom\Query;
+
 use function Functional\map;
 
 class Db
