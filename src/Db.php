@@ -50,11 +50,16 @@ class Db
         $html = $res->getBody()->getContents();
         $statusCode = $res->getStatusCode();
 
-
         $document = new \DiDom\Document($html);
         $tagContents = map(
             ['h1' => 'h1', 'title' => 'title'],
-            fn($tag) => $document->first($tag)?->text()
+            function ($tag) use ($document) {
+                /** @var \DiDom\Element|null $node */
+                $node = $document->first($tag);
+                return $node->text();
+            }
+//            fn($tag) => $document->first($tag)?->text()
+
         );
 
         $description = $document->first('meta[name="description"]')
