@@ -21,12 +21,11 @@ jobs:
 #      - name: Find directory
 #        id: find_dir
 #        run: |
-#          # Ищем директорию с именем 'my_directory'
 #          DIR_PATH=$(find ~/ -type d -name 'projects')
 #          echo "Directory found at: $DIR_PATH"
 #
-#      - name: Clean Twig Cache Before Tests
-#        run: rm -rf /home/runner/work/php-project-9/php-project-9/public/~
+      - name: Clear /home/runner/work/
+        run: rm -rf /home/runner/work/
 #      - name: Del2
 #        run: rm -rf ./public
 ##
