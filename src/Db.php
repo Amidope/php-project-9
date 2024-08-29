@@ -57,7 +57,7 @@ class Db
             function ($tag) use ($document) {
                 /** @var \DiDom\Element|null $node */
                 $node = $document->first($tag, $type = Query::TYPE_CSS, true);
-                return $node->text();
+                return $node?->text();
             }
             //            fn($tag) => $document->first($tag)?->text()
         );
