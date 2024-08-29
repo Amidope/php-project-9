@@ -13,6 +13,7 @@ function buildApp(): App
     $builder = new \DI\ContainerBuilder();
     $builder->addDefinitions(__DIR__ . '/../config/dependencies.php');
     $container = $builder->build();
+    /** @var \Slim\App<\Psr\Container\ContainerInterface> $app */
     $app = $container->get('app');
     registerRoutes($app);
     return $app;
