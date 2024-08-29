@@ -15,25 +15,25 @@ return [
         /** @var \Slim\App<\Psr\Container\ContainerInterface> $app */
         $app = AppFactory::create();
         $app->add(TwigMiddleware::createFromContainer($app));
-        $errorMiddleware = $app->addErrorMiddleware(true, true, true);
-        $errorMiddleware->setDefaultErrorHandler(function (
-            Request $request,
-            Throwable $exception,
-            bool $displayErrorDetails,
-            bool $logErrors,
-            bool $logErrorDetails
-        ) use ($app) {
-            // Логирование ошибки
-            error_log($exception->getMessage());
-
-            // Использование Twig для рендеринга страницы ошибки
-            $response = $app->getResponseFactory()->createResponse();
-            /** @var Twig $view */
-            $view = $app->getContainer()->get('view');
-            return $view->render($response, 'error.twig', [
-                'message' => 'Что-то пошло не так ¯\_(ツ)_/¯ Пожалуйста, попробуйте позже.',
-            ])->withStatus(500);
-        });
+//        $errorMiddleware = $app->addErrorMiddleware(true, true, true);
+//        $errorMiddleware->setDefaultErrorHandler(function (
+//            Request $request,
+//            Throwable $exception,
+//            bool $displayErrorDetails,
+//            bool $logErrors,
+//            bool $logErrorDetails
+//        ) use ($app) {
+//            // Логирование ошибки
+//            error_log($exception->getMessage());
+//
+//            // Использование Twig для рендеринга страницы ошибки
+//            $response = $app->getResponseFactory()->createResponse();
+//            /** @var Twig $view */
+//            $view = $app->getContainer()->get('view');
+//            return $view->render($response, 'error.twig', [
+//                'message' => 'Что-то пошло не так ¯\_(ツ)_/¯ Пожалуйста, попробуйте позже.',
+//            ])->withStatus(500);
+//        });
 
         return $app;
     },
