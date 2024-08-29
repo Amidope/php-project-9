@@ -58,8 +58,7 @@ class Db
                 $node = $document->first($tag);
                 return $node->text();
             }
-//            fn($tag) => $document->first($tag)?->text()
-
+            //            fn($tag) => $document->first($tag)?->text()
         );
 
         $description = $document->first('meta[name="description"]')
