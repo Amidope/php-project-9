@@ -10,12 +10,12 @@ use function sprintf;
 
 class Connection
 {
-    private static ?Connection $conn = null;
+    protected static ?Connection $conn = null;
 
     protected function createDsnFromUrl(string $databaseUrl): string
     {
         $parsedUrl = parse_url($databaseUrl);
-        $host = $parsedUrl['host'] ?? 'localhost';
+        $host = $parsedUrl['host'] ?? '';
         $port = $parsedUrl['port'] ?? '5432';
         $dbname = ltrim($parsedUrl['path'] ?? '', '/');
         $user = $parsedUrl['user'] ?? '';
