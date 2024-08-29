@@ -21,9 +21,9 @@ jobs:
       - name: Find file in the repository
         run: |
           find ~/ -name "2083f98d9d65ed9fa8f0f81a3bfe0310.php"
-      - name: Find file in all dir
-        run: |
-          find / -name "2083f98d9d65ed9fa8f0f81a3bfe0310.php"
+#      - name: Find file in all dir
+#        run: |
+#          find / -name "2083f98d9d65ed9fa8f0f81a3bfe0310.php"
 #      - name: Find directory
 #        id: find_dir
 #        run: |
@@ -32,9 +32,9 @@ jobs:
 #
 #      - name: Clear /home/runner/work/
 #        run: rm -rf /home/runner/work/
-#      - name: Del2
-#        run: rm -rf ./public
-##
+      - name: Del2
+        run: rm -rf ~/.cache
+#
 #      - name: Clear cache
 #        run: |
 #          rm -rf ${{ github.workspace }}/.cache
